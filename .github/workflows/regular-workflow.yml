@@ -26,4 +26,4 @@ jobs:
 
       - id: save-job-output
         name: Write happy ending to job summary
-        run: echo "${{ steps.get-farmer.outputs.farmer }} has been reunited with ${{ matrix.animal }} on ${{matrix.platform.name}}${{ matrix.platform.icon }}" >> $GITHUB_STEP_SUMMARY
+        run: echo "${{ steps.get-farmer.outputs.farmer }} has been reunited with ${{ matrix.animal }}" >> $GITHUB_STEP_SUMMARY

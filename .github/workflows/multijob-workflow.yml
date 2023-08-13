@@ -24,7 +24,7 @@ on:
     branches: master
 jobs:
   dispatch-explorer:
-    name: Disptach the explorer
+    name: Dispatch the explorer
     runs-on: ubuntu-latest
     outputs:
       explorer: ${{ steps.get-explorer.outputs.explorer }}
@@ -63,12 +63,12 @@ jobs:
 
   announce-succesful-resuce:
     needs: [perform-rescue-operation]
-    name: Annouce succeful operation
+    name: Annouce operation ${{ needs.perform-rescue-operation.result }}
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "
-          ### All rescue opertations were a ${{ job.status }}
+          ### All rescue operations were a ${{ job.status }}
 
           ---
 

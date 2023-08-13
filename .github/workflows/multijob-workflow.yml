@@ -42,7 +42,7 @@ jobs:
             { planet: 🌚, target: The doctor 👨‍⚕️, platform: macos-latest },
             { planet: 🌞, target: The pilot 🧑‍✈️, platform: windows-latest },
           ]
-    name: Land on the planet ${{matrix.mission.planet}}
+    name: rescue ${{ matrix.mission.target }} from ${{matrix.mission.planet}}
     runs-on: ${{ matrix.mission.platform }}
     timeout-minutes: 25
     steps:

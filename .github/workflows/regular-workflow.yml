@@ -1,0 +1,32 @@
+name: Reunite the farmers with his animals
+on: [workflow_dispatch, push, pull_request]
+jobs:
+  build-farm:
+    strategy:
+      fail-fast: false
+      matrix:
+        animal: [🐏, 🐖, 🐐, 🦖]
+        platform:
+          [
+            { name: ubuntu-latest, icon: 🐧 },
+            { name: ubuntu-latest, icon: 🖥️ },
+            { name: ubuntu-latest, icon: 🍎 },
+          ]
+    runs-on: ${{ matrix.platform.name }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: "https://registry.npmjs.org/"
+
+      - run: echo "I am an output"
+
+      - id: get-farmer
+        run: echo "farmer=👨‍🌾" >> $GITHUB_OUTPUT
+
+      - id: save-job-output
+        run: echo "output=${{ steps.get-farmer.outputs.farmer }} ${{ matrix.animal }} (${{ matrix.platform.icon }})" >> $GITHUB_STEP_SUMMARY

@@ -16,6 +16,12 @@ on:
           - 🛥️
           - ☁️
   pull_request:
+    branches:
+      - main
+      - main2
+      - main4
+  push:
+    branches: master
 jobs:
   dispatch-explorer:
     name: Disptach the explorer

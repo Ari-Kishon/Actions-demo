@@ -9,9 +9,10 @@ jobs:
         platform:
           [
             { name: ubuntu-latest, icon: 🐧 },
-            { name: ubuntu-latest, icon: 🖥️ },
-            { name: ubuntu-latest, icon: 🍎 },
+            { name: windows-latest, icon: 🖥️ },
+            { name: macos-latest, icon: 🍎 },
           ]
+    name: Reunite the farmer with ${{ matrix.animal }} on ${{ matrix.platform.name }}
     runs-on: ${{ matrix.platform.name }}
     timeout-minutes: 25
     steps:

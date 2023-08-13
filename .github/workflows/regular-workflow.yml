@@ -1,5 +1,5 @@
 name: Reunite the farmers with his animals
-on: [workflow_dispatch, push, pull_request]
+on: [workflow_dispatch, push]
 jobs:
   build-farm:
     name: Reunite the farmer with ${{ matrix.animal }} on ${{ matrix.platform.name }}

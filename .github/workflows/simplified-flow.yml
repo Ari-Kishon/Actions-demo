@@ -1,0 +1,30 @@
+name: simplified flow
+on: push
+jobs:
+  a:
+    uses: ./.github/workflows/reusable-workflow.yml
+  a-1:
+    needs: [a]
+    uses: ./.github/workflows/reusable-workflow.yml
+  a-2:
+    needs: [a-1]
+    uses: ./.github/workflows/reusable-workflow.yml
+
+  b:
+    uses: ./.github/workflows/reusable-workflow.yml
+
+  c:
+    uses: ./.github/workflows/reusable-workflow.yml
+  c-1:
+    needs: [c]
+    uses: ./.github/workflows/reusable-workflow.yml
+  c-2:
+    needs: [c]
+    uses: ./.github/workflows/reusable-workflow.yml
+  c-3:
+    needs: [c]
+    uses: ./.github/workflows/reusable-workflow.yml
+
+  d:
+    needs: [a-2, c-1, c-2, c-3]
+    uses: ./.github/workflows/reusable-workflow.yml

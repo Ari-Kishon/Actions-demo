@@ -21,7 +21,7 @@ on:
       - main2
       - main4
   push:
-    branches: master
+    branches: main
 jobs:
   dispatch-explorer:
     name: Dispatch the explorer

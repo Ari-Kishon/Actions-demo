@@ -1,0 +1,72 @@
+name: Send out an expedition to save (?)
+on:
+  workflow_dispatch:
+    inputs:
+      explorer:
+        default: 🧑‍🚀
+        description: which explorer to send
+        type: string
+      ship:
+        default: 🚀
+        description: which vessel to send the explorer in
+        type: choice
+        options:
+          - 🚀
+          - 🐉
+          - 🛥️
+          - ☁️
+  push:
+  pull_request:
+
+jobs:
+  dispatch-explorer:
+    name: Disptach the explorer
+    runs-on: ubuntu-latest
+    outputs:
+      explorer: ${{ steps.get-explorer.outputs.explorer }}
+      ship: ${{ steps.get-ship.outputs.ship }}
+    steps:
+      - id: get-explorer
+        name: retrieve out daring rescuer
+        run: echo "explorer=${{ inputs.explorer || '🧑‍🚀'}}" >> $GITHUB_OUTPUT
+      - id: get-ship
+        name: retrieve our daring rescuer
+        run: echo "ship=${{ inputs.ship || '🚀'}}" >> $GITHUB_OUTPUT
+
+  perform-rescue-operation:
+    needs: [dispatch-explorer]
+    strategy:
+      max-parallel: 1
+      matrix:
+        mission:
+          [
+            { planet: 🪐, target: The scientist 🧑‍🔬, platform: ubuntu-latest },
+            { planet: 🌚, target: The doctor 👨‍⚕️, platform: macos-latest },
+            { planet: 🌞, target: The pilot 🧑‍✈️, platform: windows-latest },
+          ]
+    name: Land on the planet ${{matrix.mission.planet}}
+    runs-on: ${{ matrix.mission.platform }}
+    timeout-minutes: 25
+    steps:
+      - name: ${{ needs.dispatch-explorer.outputs.ship }} ➡️ ${{ matrix.mission.planet }}
+        run: echo "${{ needs.dispatch-explorer.outputs.ship }} left for ${{ matrix.mission.planet }}"
+
+      - name: ${{ needs.dispatch-explorer.outputs.explorer }} ⬇️ ${{ matrix.mission.planet }}
+        run: echo "${{ needs.dispatch-explorer.outputs.explorer }} has landed on ${{ matrix.mission.planet }}"
+
+      - name: ${{ needs.dispatch-explorer.outputs.explorer }} 👀 ${{ matrix.mission.target }}
+        run: echo "${{ needs.dispatch-explorer.outputs.explorer }} has found ${{ matrix.mission.target }}"
+
+  announce-succesful-resuce:
+    needs: [dispatch-explorer]
+    name: Annouce succeful operation
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "
+          ### All rescue opertations were a ${{ job.status }}
+
+          ---
+
+          hooray! :)
+          " >> $GITHUB_STEP_SUMMARY

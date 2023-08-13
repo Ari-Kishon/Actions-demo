@@ -1,4 +1,4 @@
-name: Send out an expedition to save (?)
+name: Send out a rescue expedition
 on:
   workflow_dispatch:
     inputs:
@@ -15,9 +15,7 @@ on:
           - 🐉
           - 🛥️
           - ☁️
-  push:
   pull_request:
-
 jobs:
   dispatch-explorer:
     name: Disptach the explorer
@@ -58,7 +56,7 @@ jobs:
         run: echo "${{ needs.dispatch-explorer.outputs.explorer }} has found ${{ matrix.mission.target }}"
 
   announce-succesful-resuce:
-    needs: [dispatch-explorer]
+    needs: [perform-rescue-operation]
     name: Annouce succeful operation
     runs-on: ubuntu-latest
     steps:

@@ -9,7 +9,7 @@ jobs:
       - run: echo "I am an echo"
 
       - id: save-variable
-        run: echo "text='Jobs done!'" >> $GITHUB_OUTPUT
+        run: echo "text=Jobs done!" >> $GITHUB_OUTPUT
 
       - name: Save job output
         run: echo "${{ steps.save-variable.outputs.text }}" >> $GITHUB_STEP_SUMMARY
